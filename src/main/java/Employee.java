@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Employee {
@@ -100,6 +101,10 @@ public class Employee {
         return listRec.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting()));
     }
 
+    public static Map<String, Set<String>> namesEmployeeByDepartment(List<Employee> listRec){
+
+        return listRec.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.mapping(Employee::getName, Collectors.toSet())));
+    }
     public static void main(String[] args) {
 
         List<Employee> employees = new ArrayList<Employee>();
@@ -114,8 +119,10 @@ public class Employee {
         employees.add(new Employee(277, "Anuj", 31, "Male", "Product Development", 2012, 35700.0));
 
         //printing
+        System.out.println(" Count the number of employees in each department");
         System.out.println(countEmployeeByDepartment(employees));
-        
+        System.out.println(" names of all employees in each department");
+        System.out.println(namesEmployeeByDepartment(employees));
     }
 
 
